@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-toolbar style="--ion-background-color: #0d6e9b;
+  color: white;">
+    <ion-title>Review</ion-title>
+    <ion-buttons slot="start" (click)="gotoBackPage()">
+      <ion-button autoHide="false" >
+        <ion-icon name="arrow-back-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-card>
+    <ion-card-content>
+      <form [formGroup]="ratingData" (ngSubmit)="submitReview()">
+        <div style="text-align: center;">
+         
+          <ion-icon [class]="arrayRates[0].rate" name="star-half-outline" (click)="updateRating(0)"></ion-icon>
+          <ion-icon [class]="arrayRates[1].rate" name="star-half-outline" (click)="updateRating(1)"></ion-icon>
+          <ion-icon [class]="arrayRates[2].rate" name="star-half-outline" (click)="updateRating(2)"></ion-icon>
+          <ion-icon [class]="arrayRates[3].rate" name="star-half-outline" (click)="updateRating(3)"></ion-icon>
+          <ion-icon [class]="arrayRates[4].rate" name="star-half-outline" (click)="updateRating(4)"></ion-icon>
+        </div>
+        <div>
+          <ion-item>
+            <ion-label position="floating">Comments</ion-label>
+            <ion-textarea formControlName="reviewdesc"></ion-textarea>
+          </ion-item>
+          <ion-button expand="full" color="primary" type="submit">Submit</ion-button>
+        </div>
+      </form>
+      <ion-button expand="full" color="danger" (click)="gotoBackPage()">Cancel</ion-button>
+
+    </ion-card-content>
+  </ion-card>
+</ion-content>

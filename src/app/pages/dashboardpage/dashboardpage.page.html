@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar style="--ion-background-color: #0d6e9b;
+  color: white;">
+    <ion-title side="center">{{this.typeOfuserDataNeed}} Items</ion-title>
+   <ion-buttons slot="start" (click)="gotoBackPage()">
+      <ion-button autoHide="false" >
+        <ion-icon name="arrow-back-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <img  *ngIf="hidden"  src="/assets/images/nodata.jpg">
+  <form [formGroup]="selectedData" (ngSubmit)="saveSenderDetails()">
+  <ion-radio-group  (ionChange)="radioGroupChange($event)" *ngIf="!hidden">
+  <app-sendertravelerdata *ngFor="let itemData of itemsListData" [itemsData]="itemData" [radioselecbtns]="true" [bottomoptions]="false"></app-sendertravelerdata>
+  </ion-radio-group>
+  <ion-button type="submit"  expand="full" color="primary" *ngIf="!hidden">Submit</ion-button>
+</form>
+</ion-content>
+<app-footer></app-footer>

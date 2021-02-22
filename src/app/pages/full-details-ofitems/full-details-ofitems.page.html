@@ -1,0 +1,84 @@
+<ion-header>
+  <ion-toolbar style="--ion-background-color: #0d6e9b;
+  color: white;">
+    <ion-title>Full Details</ion-title>
+    <ion-buttons slot="start" (click)="backScreen()">
+      <ion-button autoHide="false" >
+        <ion-icon name="arrow-back-outline" ></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content *ngIf="ItemData">
+<ion-card class="sendertravelrdata-card">
+  <ion-card-content>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <h1 style="color: black;"><strong>{{ItemData.name | uppercase}}</strong></h1>
+          <h2 style="color: black;" (click)="showAlertpopup(itemsData.mobile)">{{ItemData.mobile}}</h2>
+        </ion-col>
+        <ion-col>
+          <h1 style="color: black;"><strong>{{ItemData.sname | uppercase}}</strong></h1>
+          
+          <h2 style="color: black;" (click)="showAlertpopup(itemsData.smobile)">{{ItemData.smobile}}</h2>
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p><strong>Date of travel</strong></p>
+          <p>{{ItemData.dateoftravel}}</p>
+
+        </ion-col>
+        <ion-col>
+          <p><strong>Time of travel</strong></p>
+          <p>{{ItemData.timeoftravel}}</p>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col>
+          <p><strong>From </strong></p>
+          <p>State :<span>{{ItemData.fromstate}}</span></p>
+          <p>District :<span>{{ItemData.fromdist}}</span></p>
+          <p>City :<span>{{ItemData.fromcity}}</span></p>
+          <p>Address :<span>{{ItemData.fromarea}}</span></p>
+        </ion-col>
+        <ion-col>
+          <p><strong>To </strong></p>
+          <p>State :<span>{{ItemData.tostate}}</span></p>
+          <p>District :<span>{{ItemData.todist}}</span></p>
+          <p>City :<span>{{ItemData.tocity}}</span></p>
+          <p>Address :<span>{{ItemData.toarea}}</span></p>
+        </ion-col>
+      </ion-row>
+      <!-- <ion-row *ngIf="ItemData.usertype === 'sender'?true:false"> -->
+      <ion-row >
+
+        <ion-col size="12"><p><strong>Item details</strong></p></ion-col>
+        <ion-col >
+          <p>itemtype :<span>{{ItemData.itemtype}}</span></p>
+          <p>packing :<span>{{ItemData.packing}}</span></p>
+          <p>description :<span>{{ItemData.description}}</span></p>
+        </ion-col>
+        <ion-col>
+          <p>weight :<span>{{ItemData.weight}}</span></p>
+          <p>amount :<span>{{ItemData.amount}}</span></p>
+        </ion-col>
+      </ion-row>
+      <ion-row  *ngIf="ItemData.starrate >0"> 
+        <ion-col>
+          <p><strong>Review</strong></p>
+          <p>Rating: {{ItemData.starrate}} Star</p>
+          <p>Comments: {{ItemData.stardescription}}</p>
+
+        </ion-col>
+      </ion-row>
+      <ion-row>
+      </ion-row>
+    </ion-grid>
+  </ion-card-content>
+</ion-card>
+</ion-content>
+<app-footer></app-footer>

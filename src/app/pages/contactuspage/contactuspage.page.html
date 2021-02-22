@@ -1,0 +1,27 @@
+<ion-content class="main-div-css">
+  <app-sidemenu [pagetitle]="pagetitle"></app-sidemenu>
+  <div class="contact-us-im-css">
+    <div class="center-text-css">
+      <p><strong>travellerscourier@gmail.com</strong></p>
+      <p><strong>G.Dhanaraj</strong></p>
+    </div>
+  </div>
+  <div class="contact-form-css">
+    <form [formGroup]="contactForm" (ngSubmit)="submitForm()">
+    <ion-item>
+      <ion-label position="floating">Name</ion-label>
+      <ion-input formControlName="name"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Email</ion-label>
+      <ion-input formControlName="email"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Message</ion-label>
+      <ion-textarea rows="6" cols="20" formControlName="message" placeholder="Enter any notes here..."></ion-textarea>
+    </ion-item>
+    <ion-button type="submit" expand="full" color="primary" class="btnsubmit">Submit</ion-button>
+  </form>
+  </div>
+</ion-content>
+<app-footer></app-footer>
