@@ -106,11 +106,9 @@ export class ItemProvidersService {
       })
     };
     let remUrl="", dataUrl="";
-    if(typeofuser=="traveler"){
+    if(typeofuser=="sender"){
       remUrl="?usertype="+typeofuser+"&&role=active&&senderid="+userid;
     dataUrl = ApiUrl+'/vlrlist.php'+remUrl;
-      
-
     }
     else{
       remUrl="?usertype="+typeofuser+"&&role=active&&travelerid="+userid;
@@ -131,7 +129,7 @@ export class ItemProvidersService {
       })
     };
     let remUrl="", dataUrl="";
-    if(typeofuser=="traveler"){
+    if(typeofuser=="sender"){
       remUrl="?usertype="+typeofuser+"&&role=active&&travelerid="+userid;
       dataUrl = ApiUrl+'/vlrlistnew.php'+remUrl;
 

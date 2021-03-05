@@ -42,7 +42,7 @@ export class MylistPage implements OnInit {
 
       }
       loading.dismiss();
-      this.itemprovider.getSelectedList(this.typeOfuserDataNeed.toLowerCase(), this.userid).subscribe((selectlistres) => {
+      this.itemprovider.getMyList(this.typeOfuserDataNeed.toLowerCase(), this.userid).subscribe((selectlistres) => {
         console.log(selectlistres);
         if(selectlistres.status === "0"){
           this.hidden = true;
