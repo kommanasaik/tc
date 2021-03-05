@@ -9,6 +9,11 @@ interface WeightDatabase {
   weight: string
   created: string
 }
+interface DistenceDatabase {
+  id: number
+  distance: string
+  created: string
+}
 interface DistrictDatabase {
   id: number
   stateid: number

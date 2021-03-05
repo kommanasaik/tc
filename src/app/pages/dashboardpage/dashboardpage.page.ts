@@ -24,6 +24,7 @@ export class DashboardpagePage implements OnInit {
   selectedData: FormGroup
   itemIds:any;
   openentid:any;
+  selectRadio:string="";
   constructor(
     public menu: MenuController,
     private itemprovider: ItemProvidersService,
@@ -59,6 +60,7 @@ console.log(this.itemIds)
 
   ngOnInit() {
     this.getuserData();
+    this.openentid="";
   }
   async getuserData() {
     const loading = await this.loadingController.create({
@@ -109,7 +111,7 @@ console.log(this.itemIds)
     const loading = await this.loadingController.create({
       message: 'Please wait'
     });
-    this.itemprovider.getUsersList(this.typeOfuserDataNeed, this.todaydate,this.userid).subscribe(data => {
+    this.itemprovider.getUsersAllList(this.typeOfuserDataNeed, this.todaydate,this.userid).subscribe(data => {
       console.log(data);
       if (data != null)
       {
@@ -151,13 +153,14 @@ console.log(this.itemIds)
     });
     await loading.present();
     console.log(this.selectedData.value.itemid);
-    this.selectedData.value.itemid=this.itemIds;
-    if (this.selectedData.value.itemid == "") {
+    if (this.selectRadio == "") {
 
       this.commonUictrl.presentAlert("Alert", "Please select any item", ["ok"]);
       loading.dismiss();
     }
     else {
+    this.selectedData.value.itemid=this.itemIds;
+
       this.itemprovider.saveSelectedItems(this.selectedData.value).subscribe((res) => {
         console.log(res);
         if (res != null) {
@@ -174,6 +177,6 @@ console.log(this.itemIds)
   }
   radioGroupChange(event) {
     this.openentid = '' + event.detail.value.userid;
-    
+    this.selectRadio='' + event.detail.value.userid;
   }
 }

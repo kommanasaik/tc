@@ -58,7 +58,8 @@ const routes: Routes = [
   {
     path: 'terms',
     loadChildren: () => import('./pages/terms/terms.module').then( m => m.TermsPageModule)
-  },  {
+  },
+  {
     path: 'starratingpageforitem',
     loadChildren: () => import('./pages/starratingpageforitem/starratingpageforitem.module').then( m => m.StarratingpageforitemPageModule)
   },
@@ -70,6 +71,18 @@ const routes: Routes = [
     path: 'useradditemslist',
     loadChildren: () => import('./pages/useradditemslist/useradditemslist.module').then( m => m.UseradditemslistPageModule)
   },
+  {
+    path: 'mpinpage',
+    loadChildren: () => import('./pages/mpinpage/mpinpage.module').then( m => m.MpinpagePageModule)
+  },
+ 
+  {
+    path: 'mylist',
+    loadChildren: () => import('./pages/mylist/mylist.module').then( m => m.MylistPageModule)
+  },
+
+  
+ 
 
 
 

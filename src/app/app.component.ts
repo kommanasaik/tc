@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { CommonUiControlService } from '../app/providers/common-ui-control.service';
 import {Location} from '@angular/common';
+import { Storage } from '@ionic/storage';
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -20,6 +22,8 @@ export class AppComponent {
   LoginUsertype:string="";
 
   constructor(
+    public storage: Storage,
+
     private location: Location,
     private network: Network,
     private platform: Platform,
@@ -35,7 +39,16 @@ export class AppComponent {
   }
 
   initializeApp() {
-    
+    // if(this.storage.get("mobileno")!=null){
+    //   // this.rootPage = "BookServicePage"
+    //   this.router.navigate(['mpin']);
+    // }
+    // else{
+    //   // this.rootPage = "IntroductionSliderPage" 
+    //   this.router.navigate(['loginpage']);
+    // }
+
+   
     this.commonuiCtrl.getTypeOfUser().then((user) => {
       this.LoginUsertype=user;
     });
@@ -58,7 +71,7 @@ export class AppComponent {
       this.platform.backButton.subscribeWithPriority(0, () => {
         this.routerOutlets.forEach(async(outlet: IonRouterOutlet) => {
           if (this.router.url != '/selectuserpage') {
-            if(this.router.url == '/loginpage' || this.router.url == '/welcomeslider'){
+            if(this.router.url == '/loginpage' || this.router.url == '/welcomeslider' || this.router.url == '/mpinpage' ){
               navigator['app'].exitApp();
 
             }
@@ -118,7 +131,7 @@ export class AppComponent {
     if (loginstatus == true) {
       let userexistingstatus = await this.commonuiCtrl.isUserExist();
       if (userexistingstatus === true) {
-        this.router.navigate(['itemdetail']);
+        this.router.navigate(['mpinpage']);
       }
       else {
         this.router.navigate(['selectuserpage']);
@@ -128,7 +141,9 @@ export class AppComponent {
     }
   }
   RedirectToPage(pageis) {
-    this.router.navigate([pageis]);
+    // this.router.navigate([pageis]);
+    this.router.navigateByUrl('/'+pageis,{ replaceUrl: true });
+
     this.menuCtrl.close();
   }
   logout() {

@@ -17,12 +17,15 @@
       <ion-row>
         <ion-col>
           <h1 style="color: black;"><strong>{{ItemData.name | uppercase}}</strong></h1>
-          <h2 style="color: black;" (click)="showAlertpopup(itemsData.mobile)">{{ItemData.mobile}}</h2>
+          <ion-icon name="call" (click)="showAlertpopup(ItemData.mobile)" ></ion-icon>&nbsp;<span (click)="showAlertpopup(ItemData.mobile)">{{ItemData.mobile}}</span>
+
+          <!-- <ion-icon name="call" (click)="showAlertpopup(itemsData.mobile)" ></ion-icon>&nbsp;<span (click)="showAlertpopup(ItemData.mobile)"></span> <h2 style="color: black;" (click)="showAlertpopup(ItemData.mobile)">{{ItemData.mobile}}</h2> -->
         </ion-col>
         <ion-col>
           <h1 style="color: black;"><strong>{{ItemData.sname | uppercase}}</strong></h1>
+          <ion-icon name="call" (click)="showAlertpopup(ItemData.mobile)" ></ion-icon>&nbsp;<span (click)="showAlertpopup(ItemData.mobile)">{{ItemData.smobile}}</span>
           
-          <h2 style="color: black;" (click)="showAlertpopup(itemsData.smobile)">{{ItemData.smobile}}</h2>
+          <!-- <ion-icon name="call" (click)="showAlertpopup(itemsData.mobile)" ></ion-icon>&nbsp;<span (click)="showAlertpopup(ItemData.mobile)"></span> <h2 style="color: black;" (click)="showAlertpopup(ItemData.smobile)">{{ItemData.smobile}}</h2> -->
         </ion-col>
       </ion-row>
       <ion-row>
@@ -31,11 +34,11 @@
           <p>{{ItemData.dateoftravel}}</p>
 
         </ion-col>
-        <ion-col>
+        <!-- <ion-col>
           <p><strong>Time of travel</strong></p>
           <p>{{ItemData.timeoftravel}}</p>
 
-        </ion-col>
+        </ion-col> -->
       </ion-row>
       <ion-row>
         <ion-col>

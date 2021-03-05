@@ -27,18 +27,29 @@ export class ItemProvidersService {
     return this.http.get(dataUrl,{responseType: 'json'} );
   }
 
+  PushContactData(name,email,message): Observable<any> {
+    const dataUrl = ApiUrl+'/email.php?email='+email+'&&name='+name+'&&message='+message;
+    return this.http.get(dataUrl,{responseType: 'json'} );
+  }
+
   getWeightData(): Observable<any> {
     const dataUrl = ApiUrl+'/weight.php';
+    console.log(dataUrl);
+    return this.http.get(dataUrl,{responseType: 'json'} );
+  }
+  getDistanceData(): Observable<any> {
+    const dataUrl = ApiUrl+'/distance.php';
+    console.log(dataUrl);
     return this.http.get(dataUrl,{responseType: 'json'} );
   }
   getDistrictData(): Observable<any> {
     const dataUrl = ApiUrl+'/distitems.php';
     return this.http.get(dataUrl,{responseType: 'json'} );
   }
-  getCostData(): Observable<any> {
-    const dataUrl = ApiUrl+'/amount.php';
-    return this.http.get(dataUrl,{responseType: 'json'} );
-  }
+  // getCostData(): Observable<any> {
+  //   const dataUrl = ApiUrl+'/amount.php';
+  //   return this.http.get(dataUrl,{responseType: 'json'} );
+  // }
   getCityData(): Observable<any> {
     const dataUrl = ApiUrl+'/mandalitems.php';
     return this.http.get(dataUrl,{responseType: 'json'} );
@@ -68,11 +79,48 @@ export class ItemProvidersService {
       'Access-Control-Allow-Origin': '*',
       })
     };
-     let remUrl="?type="+usertype+"&&role=active&&dateoftravel="+dateoftravel;
+     let remUrl="?type="+usertype+"&&role=active&&dateoftravel="+dateoftravel+"&&userid="+userid;
     const dataUrl = ApiUrl+'/getusers.php'+remUrl;
     return this.http.get<UserDatabase>(dataUrl,{responseType: 'json'} );
   }
+  getUsersAllList(usertype,dateoftravel,userid): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      })
+    };
+     let remUrl="?type="+usertype+"&&role=active";
+    const dataUrl = ApiUrl+'/getuserslist.php'+remUrl;
+    return this.http.get<UserDatabase>(dataUrl,{responseType: 'json'} );
+  }
   getSelectedList(typeofuser,userid): Observable<UserDatabase> {
+    //http://ijsrie.com/phpapi/api/vlrlistnew.php?usertype=traveler&&role=active&&travelerid=2
+    //http://ijsrie.com/phpapi/api/vlrlist.php?usertype=sender&&role=active&&senderid=5
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      })
+    };
+    let remUrl="", dataUrl="";
+    if(typeofuser=="traveler"){
+      remUrl="?usertype="+typeofuser+"&&role=active&&senderid="+userid;
+    dataUrl = ApiUrl+'/vlrlist.php'+remUrl;
+      
+
+    }
+    else{
+      remUrl="?usertype="+typeofuser+"&&role=active&&travelerid="+userid;
+    dataUrl = ApiUrl+'/vlrlistnew.php'+remUrl;
+    }
+
+    console.log(dataUrl);
+    return this.http.get<UserDatabase>(dataUrl,httpOptions);
+  }
+  getMyList(typeofuser,userid): Observable<UserDatabase> {
     //http://ijsrie.com/phpapi/api/vlrlistnew.php?usertype=traveler&&role=active&&travelerid=2
     //http://ijsrie.com/phpapi/api/vlrlist.php?usertype=sender&&role=active&&senderid=5
     const httpOptions = {

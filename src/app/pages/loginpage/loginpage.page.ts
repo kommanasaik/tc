@@ -78,6 +78,8 @@ export class LoginpagePage implements OnInit {
             if (result.status > 0) {
               this.commonUictrl.storage.set("userid", result.userid);
               this.commonUictrl.storage.set("name", result.name);
+              this.commonUictrl.storage.set("mobileno", result.mobile);
+
 
               this.resendOTP();
               loading.dismiss();

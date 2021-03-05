@@ -71,17 +71,17 @@
         <ion-datetime displayFormat="YYYY-MM-DD" formControlName="dateoftravel" placeholder="Select Date">
         </ion-datetime>
       </ion-item>
-      <ion-item class="frombck">
+      <!-- <ion-item class="frombck">
         <ion-label>Time of travel</ion-label>
         <ion-datetime displayFormat="h:mm:a" formControlName="timeoftravel" placeholder="Select Time"></ion-datetime>
-      </ion-item>
+      </ion-item> -->
       <ion-item class="frombck">
         <ion-label position="fixed">Item Type</ion-label>
-        <ion-input formControlName="itemtype" placeholder="Item type"></ion-input>
+        <ion-input formControlName="itemtype" class="aligintextplacwholder" placeholder="Item type"></ion-input>
       </ion-item>
       <ion-item class="frombck">
         <ion-label position="fixed">Item packing</ion-label>
-        <ion-input formControlName="packing" placeholder="Packing type"></ion-input>
+        <ion-input formControlName="packing" class="aligintextplacwholder" placeholder="Packing type"></ion-input>
       </ion-item>
       <!-- <ion-item>
         <ion-label position="fixed">Item weight</ion-label>
@@ -89,23 +89,28 @@
       </ion-item> -->
       <ion-item class="frombck">
         <ion-label>Weight</ion-label>
-        <ion-select placeholder="Select Weight" formControlName="weight" >
-          <ion-select-option *ngFor="let weight of fromWeightData" [value]="weight.weight">{{weight.weight}}
+        <ion-select placeholder="Select Weight" formControlName="weight" #idis (ionChange)="estimateCoast($event,idis.aria-valuenow)">
+          <ion-select-option *ngFor="let weight of fromWeightData"  [attr.aria-valuenow]="weight.id" dataextra="weight.id" [value]="weight.weight">{{weight.weight}}
+          </ion-select-option>
+        </ion-select>
+      </ion-item>
+
+      <ion-item class="frombck">
+        <ion-label>Distance</ion-label>
+        <ion-select placeholder="Select Distance" formControlName="distance" (ionChange)="estimateCoast($event)">
+          <ion-select-option *ngFor="let distance of fromDistenceData" [value]="distance.distance">{{distance.distance}}
           </ion-select-option>
         </ion-select>
       </ion-item>
     
       <ion-item class="frombck">
-        <ion-label>Cost</ion-label>
-        <ion-select placeholder="Select Cost" formControlName="amount">
-          <ion-select-option *ngFor="let cost of costdata" [value]="cost.amount">{{cost.amount}}
-          </ion-select-option>
-        </ion-select>
+        <ion-label position="fixed">Cost</ion-label>
+        <ion-input  placeholder="Cost" class="aligintextplacwholder" formControlName="amount" [value]="coast" readonly></ion-input>
       </ion-item>
     
       <ion-item class="frombck">
         <ion-label position="fixed">Description</ion-label>
-        <ion-input formControlName="description" placeholder="Description"></ion-input>
+        <ion-input formControlName="description" class="aligintextplacwholder" placeholder="Description"></ion-input>
       </ion-item>
         </ion-card-content>
       </ion-card>
@@ -181,10 +186,10 @@
         <ion-datetime displayFormat="YYYY-MM-DD" formControlName="dateoftravel" placeholder="Select Date">
         </ion-datetime>
       </ion-item>
-      <ion-item class="frombck">
+      <!-- <ion-item class="frombck">
         <ion-label>Time of travel</ion-label>
         <ion-datetime displayFormat="h:mm:a" formControlName="timeoftravel" placeholder="Select Time"></ion-datetime>
-      </ion-item>
+      </ion-item> -->
         </ion-card-content>
       </ion-card>
       <ion-button type="submit" expand="full" color="primary" class="btnsubmit">Submit</ion-button>

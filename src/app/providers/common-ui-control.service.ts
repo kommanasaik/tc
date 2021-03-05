@@ -97,7 +97,9 @@ export class CommonUiControlService {
   async saveLogin(userData) {
     await this.storage.set("logindata", userData).then(() => {
       console.log("success");
-      this.navCtrl.navigate(['dashboardpage']);
+      // this.navCtrl.navigate(['dashboardpage']);
+      this.navCtrl.navigateByUrl('/dashboardpage',{ replaceUrl: true });
+
     }).catch((ex) => {
       console.log(ex);
     })

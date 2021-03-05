@@ -17,6 +17,13 @@ export class AuthserviceService {
    /**
 * @returns sending post request to send sms
 */
+
+updateMpin(mpindata): Observable<any> {
+  console.log(mpindata);
+  let controllMethod=this.apiUrls.api+"/updatempin.php?mobile="+mpindata.phone+"&&mpin="+mpindata.mpin;
+  console.log(controllMethod);
+return this.http.get(controllMethod);
+}
 sendSms(smsObj): Observable<any> {
   const httpOptions = {
     headers: new HttpHeaders({
@@ -39,6 +46,18 @@ checkNumber(numberObj): Observable<any> {
     })
   };
   let controllMethod=this.apiUrls.api+"/login.php?mobile="+numberObj.phoneno;
+  return this.http.get(controllMethod, httpOptions)
+}
+checkMpin(mobileno,mpin): Observable<any> {
+ 
+  const httpOptions = {
+    headers: new HttpHeaders({
+      'Content-Type': 'application/json',
+    'Accept': 'application/json',
+    'Access-Control-Allow-Origin': '*'
+    })
+  };
+  let controllMethod=this.apiUrls.api+"/mpin.php?mobile="+mobileno+"&&mpin="+mpin;
   return this.http.get(controllMethod, httpOptions)
 }
 RegistrationUser(reqObj): Observable<any> {

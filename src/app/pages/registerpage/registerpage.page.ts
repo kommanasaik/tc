@@ -15,6 +15,8 @@ export class RegisterpagePage implements OnInit {
   phoneno: string;
   emailid: string;
   fullname: string;
+  mpin: string;
+
   constructor(private formBuilder: FormBuilder,
     private authservice: AuthserviceService,
     private commonUictrl: CommonUiControlService) {
@@ -33,6 +35,8 @@ export class RegisterpagePage implements OnInit {
       phone: ['', Validators.compose([Validators.required, Validators.minLength(10), Validators.maxLength(10)])],
 
       emailid: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+      mpin: ['', Validators.compose([Validators.required, Validators.minLength(4), Validators.maxLength(4)])],
+      
 
     });
   }
@@ -50,17 +54,15 @@ export class RegisterpagePage implements OnInit {
     this.phoneno = this.registerForm.value.phone;
     this.fullname = this.registerForm.value.fullname;
     this.emailid = this.registerForm.value.emailid;
-    let today = new Date().toLocaleDateString()
-    // this.utils.presentLoading();
-    // let stringObject={
-    //   "strSearchString": "<Info><ACTION>A</ACTION><Mobileno>"+this.phoneno+"</Mobileno><Email>"+this.emailid+"</Email><Fullname>"+this.fullname+"</Fullname><UserType>1</UserType></Info>"
-    //   }
+    this.mpin = this.registerForm.value.mpin;
 
-    let stringObject = {
+    let today = new Date().toLocaleDateString()
+  let stringObject = {
       "name": this.fullname,
       "email": this.emailid,
       "mobile": this.phoneno,
-      "created": today
+      "created": today,
+      "mpin":this.mpin
     }
 
     this.authservice.RegistrationUser(stringObject).subscribe((result) => {

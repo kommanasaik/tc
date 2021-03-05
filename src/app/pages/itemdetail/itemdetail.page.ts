@@ -11,16 +11,19 @@ import * as moment from 'moment';
 })
 export class ItemdetailPage implements OnInit {
 
+  coast:number=0;
   statesdata: StatesDatabase[];
   Weigthdata: WeightDatabase[];
+  DistenceData:DistenceDatabase[];
 
   districtsata: DistrictDatabase[];
-  costdata: CostDatabase[];
+  // costdata: CostDatabase[];
 
   citysdata: CityDatabase[];
 
   fromstatesData: StatesDatabase[];
   fromWeightData: WeightDatabase[];
+  fromDistenceData: DistenceDatabase[];
   fromCostData: CostDatabase[];
 
 
@@ -62,11 +65,13 @@ export class ItemdetailPage implements OnInit {
     });
   }
   ngOnInit() {
+    
     this.travellerValid();
     this.senderValid();
 
     this.getStatesData();
     this.getWeightData();
+    this.getDistenceData();
     
 
   }
@@ -86,9 +91,10 @@ export class ItemdetailPage implements OnInit {
       packing: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       weight: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       amount: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      distance: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       description: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       dateoftravel: ['', Validators.compose([Validators.required])],
-      timeoftravel: ['', Validators.compose([Validators.required])],
+      // timeoftravel: ['', Validators.compose([Validators.required])],
       role: ['active'],
       datecreated: [moment(new Date()).format("YYYY-MM-DD  h:mm:ss")],
       dateupdate: [moment(new Date()).format("YYYY-MM-DD  h:mm:ss")],
@@ -107,7 +113,7 @@ export class ItemdetailPage implements OnInit {
       tocity: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       toarea: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       dateoftravel: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
-      timeoftravel: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
+      // timeoftravel: ['', Validators.compose([Validators.required, Validators.minLength(1)])],
       role: ['active'],
       datecreated: [moment(new Date()).format("YYYY-MM-DD  h:mm:ss")],
       dateupdate: [moment(new Date()).format("YYYY-MM-DD  h:mm:ss")],
@@ -123,20 +129,23 @@ export class ItemdetailPage implements OnInit {
     this.itmprservices.getCityData().subscribe(data => this.citysdata = data.body);
   }
   getWeightData() {
-    
     this.itmprservices.getWeightData().subscribe(data => {
       this.Weigthdata = data;
       this.fromWeightData = this.Weigthdata = this.Weigthdata;
-console.log(this.fromWeightData)
+      console.log(this.fromWeightData)
     });
-    this.itmprservices.getCostData().subscribe(data => {
-      this.costdata = data
-      console.log(this.costdata);
-    });
-
-   
+    // this.itmprservices.getCostData().subscribe(data => {
+    //   this.costdata = data
+    //   console.log(this.costdata);
+    // });
   }
-
+  getDistenceData() {
+    this.itmprservices.getDistanceData().subscribe(data => {
+      this.DistenceData = data;
+      this.fromDistenceData = this.DistenceData;
+      console.log(this.fromDistenceData)
+    });
+  }
   dataChange(area, event) {
     let selectedValueis = event.target.value;
     console.log(selectedValueis);
@@ -167,7 +176,7 @@ console.log(this.fromWeightData)
   }
   async saveTravelerDetails() {
     this.travelerData.value.userid = this.userid;
-    this.travelerData.value.timeoftravel = moment(this.travelerData.value.timeoftravel, 'h:mm').format('h:mm').toString();
+     this.travelerData.value.timeoftravel = moment(new Date()).format("h:mm:ss").toString();
     this.travelerData.value.dateoftravel = moment(this.travelerData.value.dateoftravel, 'YYYY-MM-DD').format('YYYY-MM-DD').toString();
     console.log(this.travelerData.value);
     const loading = await this.loadingController.create({
@@ -191,10 +200,10 @@ console.log(this.fromWeightData)
   }
   async saveSenderDetails() {
     this.senderData.value.userid = this.userid;
-    this.senderData.value.timeoftravel = moment(this.senderData.value.timeoftravel, 'h:mm').format('h:mm').toString();
+     this.senderData.value.timeoftravel =moment(new Date()).format("h:mm:ss").toString();
     this.senderData.value.dateoftravel = moment(this.senderData.value.dateoftravel, 'YYYY-MM-DD').format('YYYY-MM-DD').toString();
     const loading = await this.loadingController.create({
-      message: 'Please wait'
+      message: 'Please wait'  
     });
     console.log(this.senderData.value);
     loading.present();
@@ -212,6 +221,19 @@ console.log(this.fromWeightData)
       this.commonUictrl.presentAlert("Alert", "Please enter mandatory fields");
       if (loading) loading.dismiss();
     }
+  }
+  estimateCoast(event,eve2){
+    if(this.senderData.value.weight.length>0&&this.senderData.value.distance.length>0){
+      let weightNumber = this.senderData.value.weight.replace(/\D/g,'');
+      let priceByDistance=30;
+      priceByDistance=this.senderData.value.distance == "below 100 km"?30:40;
+      console.log(this.senderData.value.distance+"def "+priceByDistance);
+      this.coast=weightNumber*priceByDistance;
+    }
+
+  }
+  getWeightId(weightid){
+    console.log("rk"+weightid);
   }
 }
 
