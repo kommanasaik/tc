@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar style="--ion-background-color: #0d6e9b;
   color: white;">
-    <ion-title side="center">My list</ion-title>
+    <ion-title side="center">Party list</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button autoHide="false"></ion-menu-button>
     </ion-buttons>
@@ -9,8 +9,21 @@
 </ion-header>
 <ion-content>
   <img  *ngIf="hidden"  src="/assets/images/nodata.jpg">
+  
+  
   <form *ngIf="!hidden"  (ngSubmit)="saveSenderDetails()">
-  <app-sendertravelerdata *ngFor="let itemData of itemsListData"  (deleteSelectedItemEvent)="getuserData()" [itemsData]="itemData" [radioselecbtns]="false" [bottomoptions]="false"></app-sendertravelerdata>
+    <ion-row style="text-align: center;
+    font-size: 20px;
+    color: black;
+      text-decoration: underline;">
+      <ion-col>
+      <ion-label>
+        Parties who selected you
+  
+      </ion-label>
+    </ion-col>
+    </ion-row>
+  <app-sendertravelerdata *ngFor="let itemData of itemsListData"  (deleteSelectedItemEvent)="getuserData()" [deleteselecbtns]="false" [itemsData]="itemData" [radioselecbtns]="false" [bottomoptions]="false"></app-sendertravelerdata>
 </form>
 </ion-content>
 <app-footer></app-footer>

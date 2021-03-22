@@ -21,7 +21,9 @@ export class UseradditemslistPage implements OnInit {
   typeOfuserDataNeed: string;
   todaydate = moment(new Date(), 'YYYY-MM-DD').format("YYYY-MM-DD");
   itemsListData: UserDatabase
-  selectedData: FormGroup
+  selectedData: FormGroup;
+  fromcityid:any;
+  tocitid:any;
   constructor(
     public menu: MenuController,
     private itemprovider: ItemProvidersService,
@@ -106,7 +108,12 @@ export class UseradditemslistPage implements OnInit {
     event.target.complete();
   }
   radioGroupChange(event) {
+    this.fromcityid='';
+    this.tocitid='';
     this.selectedData.value.itemid = '' + event.detail.value.id;
+    this.fromcityid=event.detail.value.fromcityid;
+    this.tocitid=event.detail.value.tocityid;
+
   }
   async saveSenderDetails() {
     let itemIds=this.selectedData.value.itemid;
@@ -121,7 +128,9 @@ export class UseradditemslistPage implements OnInit {
     else {
       let navigationExtras: NavigationExtras = {
         state: {
-          user: itemIds
+          user: itemIds,
+          fromcityid:this.fromcityid,
+          tocityid:this.tocitid
         }
       };
       this.commonUictrl.navCtrl.navigate(['dashboardpage'],navigationExtras);

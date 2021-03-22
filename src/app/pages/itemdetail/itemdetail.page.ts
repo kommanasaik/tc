@@ -1,16 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { LoadingController } from '@ionic/angular';
+import { LoadingController,ModalController  } from '@ionic/angular';
 import { CommonUiControlService } from 'src/app/providers/common-ui-control.service';
 import { ItemProvidersService } from '../../providers/item-providers.service';
 import * as moment from 'moment';
+import {TcPage} from '../../modals/tc/tc.page';
 @Component({
   selector: 'app-itemdetail',
   templateUrl: './itemdetail.page.html',
   styleUrls: ['./itemdetail.page.scss'],
 })
 export class ItemdetailPage implements OnInit {
-
+  memberchecked:boolean;
   coast:number=0;
   statesdata: StatesDatabase[];
   Weigthdata: WeightDatabase[];
@@ -40,7 +41,7 @@ export class ItemdetailPage implements OnInit {
   pagetitle="Add Details";
   usertype: string;
   userid: string;
-  constructor(public itmprservices: ItemProvidersService, private formbuilder: FormBuilder, private commonUictrl: CommonUiControlService,
+  constructor(public modalCtrl : ModalController,public itmprservices: ItemProvidersService, private formbuilder: FormBuilder, private commonUictrl: CommonUiControlService,
     private loadingController: LoadingController) {
     this.commonUictrl.menuCntrl.enable(true,'custom');
 
@@ -175,6 +176,7 @@ export class ItemdetailPage implements OnInit {
     }
   }
   async saveTravelerDetails() {
+    if(this.memberchecked){
     this.travelerData.value.userid = this.userid;
      this.travelerData.value.timeoftravel = moment(new Date()).format("h:mm:ss").toString();
     this.travelerData.value.dateoftravel = moment(this.travelerData.value.dateoftravel, 'YYYY-MM-DD').format('YYYY-MM-DD').toString();
@@ -198,7 +200,13 @@ export class ItemdetailPage implements OnInit {
 
     }
   }
+  else{
+    this.commonUictrl.presentAlert("Alert", "Check I Agree, Terms & Conditions")
+
+  }
+  }
   async saveSenderDetails() {
+    if(this.memberchecked){
     this.senderData.value.userid = this.userid;
      this.senderData.value.timeoftravel =moment(new Date()).format("h:mm:ss").toString();
     this.senderData.value.dateoftravel = moment(this.senderData.value.dateoftravel, 'YYYY-MM-DD').format('YYYY-MM-DD').toString();
@@ -221,6 +229,10 @@ export class ItemdetailPage implements OnInit {
       this.commonUictrl.presentAlert("Alert", "Please enter mandatory fields");
       if (loading) loading.dismiss();
     }
+  }else{
+    this.commonUictrl.presentAlert("Success", "Check I Agree, Terms & Conditions")
+
+  }
   }
   estimateCoast(event,eve2){
     if(this.senderData.value.weight.length>0&&this.senderData.value.distance.length>0){
@@ -235,5 +247,26 @@ export class ItemdetailPage implements OnInit {
   getWeightId(weightid){
     console.log("rk"+weightid);
   }
+  async openModal() {
+    const modal = await this.modalCtrl.create({
+      component: TcPage,
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
+  }
+  selectMember(data){
+    if (data.detail.checked == true) {
+      this.memberchecked=true;
+      //  this.selectedArray.push(data);
+     } else {
+      this.memberchecked=false;
+
+    //   let newArray = this.selectedArray.filter(function(el) {
+    //     return el.testID !== data.testID;
+    //  });
+    //   this.selectedArray = newArray;
+    }
+   // console.log(this.selectedArray);
+   }
 }
 

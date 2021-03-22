@@ -114,6 +114,18 @@
       </ion-item>
         </ion-card-content>
       </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-checkbox style="margin-bottom: -4px;" (ionChange)="selectMember($event)"></ion-checkbox>&nbsp;
+            <span style="color: #143164;">I agree,</span>
+            <ion-label style="text-decoration: underline;color: #143164;"  (click)="openModal()" >Terms and Condtitions</ion-label>
+
+          </ion-col>
+
+        
+        </ion-row>
+      </ion-grid>
       <ion-button type="submit" expand="full" color="primary" class="btnsubmit">Submit</ion-button>
     </form>
   </div>
@@ -186,12 +198,24 @@
         <ion-datetime displayFormat="YYYY-MM-DD" formControlName="dateoftravel" placeholder="Select Date">
         </ion-datetime>
       </ion-item>
-      <!-- <ion-item class="frombck">
-        <ion-label>Time of travel</ion-label>
-        <ion-datetime displayFormat="h:mm:a" formControlName="timeoftravel" placeholder="Select Time"></ion-datetime>
-      </ion-item> -->
+    
+
         </ion-card-content>
       </ion-card>
+      <ion-grid>
+        <ion-row>
+          <ion-col>
+            <ion-checkbox style="margin-bottom: -4px;"  (ionChange)="selectMember($event)"></ion-checkbox>&nbsp;
+
+            <span style="color: #143164;">I agree,</span>
+            <ion-label style="text-decoration: underline;color: #143164;"  (click)="openModal()" >Terms and Condtitions</ion-label>
+
+          </ion-col>
+
+        
+        </ion-row>
+      </ion-grid>
+     
       <ion-button type="submit" expand="full" color="primary" class="btnsubmit">Submit</ion-button>
     </form>
   </div>

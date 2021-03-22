@@ -83,7 +83,7 @@ export class ItemProvidersService {
     const dataUrl = ApiUrl+'/getusers.php'+remUrl;
     return this.http.get<UserDatabase>(dataUrl,{responseType: 'json'} );
   }
-  getUsersAllList(usertype,dateoftravel,userid): Observable<any> {
+  getUsersAllList(usertype,dateoftravel,userid,fromcity,tocity): Observable<any> {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
@@ -91,7 +91,7 @@ export class ItemProvidersService {
       'Access-Control-Allow-Origin': '*',
       })
     };
-     let remUrl="?type="+usertype+"&&role=active";
+     let remUrl="?type="+usertype+"&&role=active&&dateoftravel="+dateoftravel+"&&fromcity="+fromcity+"&&tocity="+tocity;
     const dataUrl = ApiUrl+'/getuserslist.php'+remUrl;
     return this.http.get<UserDatabase>(dataUrl,{responseType: 'json'} );
   }
@@ -164,6 +164,18 @@ export class ItemProvidersService {
       })
     };
     const dataUrl = ApiUrl+'/updateitems.php?id='+itemid;
+    console.log(dataUrl);
+    return this.http.get(dataUrl,httpOptions);
+  }
+  deleteMyItem(itemid): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      })
+    };
+    const dataUrl = ApiUrl+'/updatetraveler.php?id='+itemid;
     console.log(dataUrl);
     return this.http.get(dataUrl,httpOptions);
   }

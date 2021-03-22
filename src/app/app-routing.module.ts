@@ -79,7 +79,11 @@ const routes: Routes = [
   {
     path: 'mylist',
     loadChildren: () => import('./pages/mylist/mylist.module').then( m => m.MylistPageModule)
+  },  {
+    path: 'tc',
+    loadChildren: () => import('./modals/tc/tc.module').then( m => m.TcPageModule)
   },
+
 
   
  

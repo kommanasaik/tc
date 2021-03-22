@@ -25,6 +25,8 @@ export class DashboardpagePage implements OnInit {
   itemIds:any;
   openentid:any;
   selectRadio:string="";
+  fromcity:any;
+  tocity:any;
   constructor(
     public menu: MenuController,
     private itemprovider: ItemProvidersService,
@@ -42,6 +44,9 @@ export class DashboardpagePage implements OnInit {
       if (this.router.getCurrentNavigation().extras.state) {
        console.log(this.router.getCurrentNavigation().extras.state.user);
        this.itemIds=this.router.getCurrentNavigation().extras.state.user;
+       this.fromcity=this.router.getCurrentNavigation().extras.state.fromcityid;
+       this.tocity=this.router.getCurrentNavigation().extras.state.tocityid;
+
 console.log(this.itemIds)
       }
     });
@@ -111,7 +116,7 @@ console.log(this.itemIds)
     const loading = await this.loadingController.create({
       message: 'Please wait'
     });
-    this.itemprovider.getUsersAllList(this.typeOfuserDataNeed, this.todaydate,this.userid).subscribe(data => {
+    this.itemprovider.getUsersAllList(this.typeOfuserDataNeed, this.todaydate,this.userid,this.fromcity,this.tocity).subscribe(data => {
       console.log(data);
       if (data != null)
       {

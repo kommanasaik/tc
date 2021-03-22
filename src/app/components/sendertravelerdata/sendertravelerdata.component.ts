@@ -15,9 +15,18 @@ import { CallNumber } from '@ionic-native/call-number/ngx';
 export class SendertravelerdataComponent implements OnInit {
   @Input('itemsData') itemsData?
   @Input('radioselecbtns') radioselecbtns?
+  @Input('deleteselecbtns') deleteselecbtns?
+
   @Input('bottomoptions') bottomoptions?
   @Output() deleteSelectedItemEvent=new EventEmitter(); 
   isSender = false;
+  hidden: boolean = false;
+  DataStatus: number;
+  userid: string;
+  typeOfuser: string;
+  typeOfuserDataNeed: string;
+  todaydate = moment(new Date(), 'YYYY-MM-DD').format("YYYY-MM-DD");
+  itemsListData: UserDatabase
   constructor(private itemprovider: ItemProvidersService,
     private commonUictrl: CommonUiControlService,
     public call:CallNumber, public alertCtrl: AlertController,
@@ -95,6 +104,54 @@ async  DeleteItem(itemid)
     };
     this.router.navigate(['starratingpageforitem'],navigationExtras);
   }
+  deletemyitem(itemData){
+    this.showAlertpopupdelete(itemData);
+  }
+  async showAlertpopupdelete(Item) {
+    let ItemID=Item.id;
+    const alert = await this.alertCtrl.create({
+     header: 'Alert',
+      message: "Do you want to cancel?",
+      buttons: [{
+        text: 'Close',
+        role: 'cancel',
+        cssClass: 'secondary',
+        handler: (blah) => {}
+      }, {
+        text: 'Cancel',
+        handler: () => {
+          this.DeleteItemData( ItemID)
+        }
+      }]
+    });
+  
+    await alert.present();
+  }
+ 
+
+ async DeleteItemData(ItemID)
+  {
+  try
+  {   
+    const loading = await this.loadingController.create({
+      message: 'Please wait'
+    });
+    await loading.present();
+    this.itemprovider.deleteMyItem(ItemID).subscribe((data) => {
+      console.log(data);
+      this.commonUictrl.presentAlert("Success","Trip Cancel successfully",['ok']);
+     // this.getuserData();
+      loading.dismiss();   
+      this.deleteSelectedItemEvent.next();
+
+    });
+  }
+  catch(e)
+  {
+    console.error(e) 
+  }
+  }
+
   async showAlertpopup(Item) {
     const alert = await this.alertCtrl.create({
      header: 'Call',
@@ -114,8 +171,6 @@ async  DeleteItem(itemid)
   
     await alert.present();
   }
-
-
   CallNumber(PHONEMOBILE)
   {
   try
