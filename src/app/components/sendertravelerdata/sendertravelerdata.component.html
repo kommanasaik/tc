@@ -9,14 +9,14 @@
 
       <ion-grid>
         <ion-row>
-          <ion-col>
+          <ion-col col-6>
             <p>{{itemsData.fromcity}}</p>
             <p>
               <ion-icon name="arrow-down-outline" style="margin-left: 26px;"></ion-icon>
             </p>
             <p>{{itemsData.tocity}}</p>
           </ion-col>
-          <ion-col>
+          <ion-col style="text-align: right;"  col-6>
             <div>
               <p><strong> Date </strong></p>
               <p>{{itemsData.dateoftravel}} </p>
@@ -25,6 +25,23 @@
         </ion-row>
         <ion-row>
           <ion-col>
+            <p><strong>From address</strong></p>
+            <p>
+              <ion-icon name="person-outline"></ion-icon>&nbsp;<span>{{itemsData.fromarea}}</span>
+            </p>
+          
+          </ion-col>
+         
+          <ion-col  style="text-align: right;">
+            <p><strong>To address</strong></p>
+            <p>
+              <ion-icon name="person-outline"></ion-icon>&nbsp;<span>{{itemsData.toarea}}</span>
+            </p>
+
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col  col-6>
             <p><strong>User Details</strong></p>
             <p>
               <ion-icon name="person-outline"></ion-icon>&nbsp;<span>{{itemsData.email}}</span>
@@ -33,17 +50,29 @@
               <ion-icon name="call" (click)="showAlertpopup(itemsData.mobile)" ></ion-icon>&nbsp;<span (click)="showAlertpopup(itemsData.mobile)">{{itemsData.mobile}}</span>
             </p>
           </ion-col>
-          <ion-col *ngIf="itemsData.type === 'sender'?true:false">
+          <ion-col style="text-align: right;"  col-6 *ngIf="itemsData.type === 'sender'?true:false">
             <p><strong>Parcel details</strong></p>
             <p><span>itemtype :</span> <span>{{itemsData.itemtype}}</span></p>
+            <p><span>Package :</span> <span>{{itemsData.packing}} </span></p>
+
             <p><span>weight :</span> <span>{{itemsData.weight}} </span></p>
+            
+            <p><span>Amount :</span> <span>{{itemsData.amount}} </span></p>
+
+
           </ion-col>
-          <ion-col *ngIf="itemsData.usertype === 'sender'?true:false">
+          <ion-col style="text-align: right;" col-6 *ngIf="itemsData.usertype === 'sender'?true:false">
             <p><strong>Parcel details</strong></p>
             <p><span>itemtype :</span> <span>{{itemsData.itemtype}}</span></p>
+            <p><span>Package :</span> <span>{{itemsData.packing}} </span></p>
+
             <p><span>weight :</span> <span>{{itemsData.weight}} </span></p>
+            <p><span>amount :</span> <span>{{itemsData.amount}} </span></p>
+
+
           </ion-col>
         </ion-row>
+      
       </ion-grid>
     </div>
     <div *ngIf="bottomoptions">

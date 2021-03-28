@@ -40,7 +40,7 @@ export class SendertravelerdataComponent implements OnInit {
   async Deletepopup(Item) {
     const alert = await this.alertCtrl.create({
      header: 'Alert',
-      message: "Do you want to delete?",
+      message: "Do you want to Delete?",
       buttons: [{
         text: 'Cancel',
         role: 'cancel',
@@ -111,14 +111,14 @@ async  DeleteItem(itemid)
     let ItemID=Item.id;
     const alert = await this.alertCtrl.create({
      header: 'Alert',
-      message: "Do you want to cancel?",
+      message: "Do you want to Delete?",
       buttons: [{
-        text: 'Close',
+        text: 'Cancel',
         role: 'cancel',
         cssClass: 'secondary',
         handler: (blah) => {}
       }, {
-        text: 'Cancel',
+        text: 'OK',
         handler: () => {
           this.DeleteItemData( ItemID)
         }
