@@ -41,8 +41,12 @@ export class ItemdetailPage implements OnInit {
   pagetitle="Add Details";
   usertype: string;
   userid: string;
+  minDate=[moment(new Date()).format("YYYY-MM-DD")];
+  maxData : any = (new Date()).getFullYear() + 1;
   constructor(public modalCtrl : ModalController,public itmprservices: ItemProvidersService, private formbuilder: FormBuilder, private commonUictrl: CommonUiControlService,
     private loadingController: LoadingController) {
+      // moment(new Date()).format("h:mm:ss").toString();
+    
     this.commonUictrl.menuCntrl.enable(true,'custom');
 
     this.commonUictrl.getTypeOfUser().then((user) => {

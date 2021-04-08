@@ -68,7 +68,7 @@
         <ion-card-content >
       <ion-item  class="frombck">
         <ion-label>Date of travel</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DD" formControlName="dateoftravel" placeholder="Select Date">
+        <ion-datetime displayFormat="YYYY-MM-DD" [min]="minDate" [max]="maxData" formControlName="dateoftravel" placeholder="Select Date">
         </ion-datetime>
       </ion-item>
       <!-- <ion-item class="frombck">
@@ -195,13 +195,13 @@
         <ion-card-content >
       <ion-item class="frombck">
         <ion-label>Date of travel</ion-label>
-        <ion-datetime displayFormat="YYYY-MM-DD" formControlName="dateoftravel" placeholder="Select Date">
+        <ion-datetime displayFormat="YYYY-MM-DD" [min]="minDate" [max]="maxData" formControlName="dateoftravel" placeholder="Select Date">
         </ion-datetime>
       </ion-item>
     
 
         </ion-card-content>
-      </ion-card>
+      </ion-card> 
       <ion-grid>
         <ion-row>
           <ion-col>

@@ -6,6 +6,9 @@
       <ion-col  *ngIf="deleteselecbtns" class="ion-text-end"  style="right: 0;position: absolute;" >
         <ion-icon class="ion-icons-bottom ion-text-end" name="trash" (click)="deletemyitem(itemsData)"></ion-icon>
       </ion-col>
+      <ion-col  *ngIf="reviewselecbtns" class="ion-text-end"  style="right: 0;position: absolute;" >
+        <ion-icon class="ion-icons-bottom ion-text-end primary" name="star-half-outline" (click)="openReview(itemsData)"></ion-icon>
+      </ion-col>
 
       <ion-grid>
         <ion-row>

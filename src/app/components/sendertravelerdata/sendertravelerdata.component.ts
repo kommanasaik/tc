@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
-import { LoadingController,AlertController } from '@ionic/angular';
+import { LoadingController,AlertController,ModalController } from '@ionic/angular';
 import * as moment from 'moment';
 import { CommonUiControlService } from 'src/app/providers/common-ui-control.service';
 import { ItemProvidersService } from 'src/app/providers/item-providers.service';
@@ -16,6 +16,8 @@ export class SendertravelerdataComponent implements OnInit {
   @Input('itemsData') itemsData?
   @Input('radioselecbtns') radioselecbtns?
   @Input('deleteselecbtns') deleteselecbtns?
+  @Input('reviewselecbtns') reviewselecbtns?
+
 
   @Input('bottomoptions') bottomoptions?
   @Output() deleteSelectedItemEvent=new EventEmitter(); 
@@ -29,7 +31,7 @@ export class SendertravelerdataComponent implements OnInit {
   itemsListData: UserDatabase
   constructor(private itemprovider: ItemProvidersService,
     private commonUictrl: CommonUiControlService,
-    public call:CallNumber, public alertCtrl: AlertController,
+    public call:CallNumber, public alertCtrl: AlertController,public modalCtrl : ModalController,
     public loadingController: LoadingController,private router:Router) {
 
   }
@@ -106,6 +108,13 @@ async  DeleteItem(itemid)
   }
   deletemyitem(itemData){
     this.showAlertpopupdelete(itemData);
+  }
+  async openReview() {
+    const modal = await this.modalCtrl.create({
+      component: '',
+      cssClass: 'my-custom-class'
+    });
+    return await modal.present();
   }
   async showAlertpopupdelete(Item) {
     let ItemID=Item.id;
