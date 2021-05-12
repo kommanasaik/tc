@@ -83,6 +83,10 @@ const routes: Routes = [
     path: 'tc',
     loadChildren: () => import('./modals/tc/tc.module').then( m => m.TcPageModule)
   },
+  {
+    path: 'ratingpagemodel',
+    loadChildren: () => import('./pages/ratingpagemodel/ratingpagemodel.module').then( m => m.RatingpagemodelPageModule)
+  },
 
 
   

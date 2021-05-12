@@ -3,12 +3,15 @@
   <ion-card-content >
     <div>
       <ion-radio slot="start" *ngIf="radioselecbtns" [value]="itemsData"></ion-radio>
+      <ion-col  *ngIf="!deleteselecbtns" style="position: absolute;left: 50%;">
+        <ion-icon name="star-half-outline" style="font-size: 23px;" (click)="ratingPopUp(itemsData)"></ion-icon>
+      </ion-col>
       <ion-col  *ngIf="deleteselecbtns" class="ion-text-end"  style="right: 0;position: absolute;" >
         <ion-icon class="ion-icons-bottom ion-text-end" name="trash" (click)="deletemyitem(itemsData)"></ion-icon>
       </ion-col>
-      <ion-col  *ngIf="reviewselecbtns" class="ion-text-end"  style="right: 0;position: absolute;" >
+      <!-- <ion-col  *ngIf="reviewselecbtns" class="ion-text-end"  style="right: 0;position: absolute;" >
         <ion-icon class="ion-icons-bottom ion-text-end primary" name="star-half-outline" (click)="openReview(itemsData)"></ion-icon>
-      </ion-col>
+      </ion-col> -->
 
       <ion-grid>
         <ion-row>

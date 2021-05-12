@@ -60,3 +60,7 @@ interface UserDatabase {
   datecreated: any
   status: any
 }
+interface RatingDatabase{
+  rating:any
+  reviewdesc:any
+}

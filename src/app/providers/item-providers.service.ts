@@ -194,4 +194,20 @@ export class ItemProvidersService {
     console.log(dataUrl);
     return this.http.get(dataUrl,httpOptions);
   }
+  getUserRating(usertype,userid){
+    let dataUrl="";
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Access-Control-Allow-Origin': '*',
+      })
+    };
+    if(usertype=='sender')
+    dataUrl=ApiUrl+'/getrewsend.php?type='+usertype+'&&userid='+userid;
+    else
+    dataUrl=ApiUrl+'/getrewtra.php?type='+usertype+'&&userid='+userid;
+console.log(dataUrl);
+    return this.http.get<RatingDatabase>(dataUrl,httpOptions);
+  }
 }

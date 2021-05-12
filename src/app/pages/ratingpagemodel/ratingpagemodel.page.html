@@ -1,0 +1,24 @@
+<ion-header>
+  <ion-toolbar  style="--ion-background-color: #0d6e9b;
+  color: white;">
+    <ion-title  side="center">Rating</ion-title>
+      <ion-buttons slot="primary">
+        <ion-button (click)="dismiss()">
+          <ion-icon slot="icon-only" name="close-circle-outline"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div>
+    <ion-card *ngFor="let rating of ratingdatas">
+      <ion-item>
+        <ion-icon name="star" *ngFor="let item of [].constructor(parsedata(rating.rating)); let i = index" style="color: #0d6e9b;"></ion-icon>
+      </ion-item>
+      <ion-card-content>
+        {{rating.reviewdesc}}
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

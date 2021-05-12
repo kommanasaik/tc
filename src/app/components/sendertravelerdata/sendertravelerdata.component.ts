@@ -6,7 +6,7 @@ import { CommonUiControlService } from 'src/app/providers/common-ui-control.serv
 import { ItemProvidersService } from 'src/app/providers/item-providers.service';
 import { Router } from '@angular/router';
 import { CallNumber } from '@ionic-native/call-number/ngx';
-
+import { RatingpagemodelPage } from 'src/app/pages/ratingpagemodel/ratingpagemodel.page';
 @Component({
   selector: 'app-sendertravelerdata',
   templateUrl: './sendertravelerdata.component.html',
@@ -160,7 +160,17 @@ async  DeleteItem(itemid)
     console.error(e) 
   }
   }
-
+  async ratingPopUp(itemsData) {
+    const modal = await this.modalCtrl.create({
+      component:RatingpagemodelPage,
+      componentProps: {
+        'username_title': itemsData.mobile,
+        'userid':itemsData.userid,
+        'usertype':itemsData.type
+      }
+    });
+    return await modal.present();
+  }
   async showAlertpopup(Item) {
     const alert = await this.alertCtrl.create({
      header: 'Call',
