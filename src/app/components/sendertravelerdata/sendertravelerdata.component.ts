@@ -17,6 +17,8 @@ export class SendertravelerdataComponent implements OnInit {
   @Input('radioselecbtns') radioselecbtns?
   @Input('deleteselecbtns') deleteselecbtns?
   @Input('reviewselecbtns') reviewselecbtns?
+  @Input('bottomrating') bottomrating?
+
 
 
   @Input('bottomoptions') bottomoptions?

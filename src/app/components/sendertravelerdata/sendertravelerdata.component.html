@@ -9,10 +9,7 @@
       <ion-col  *ngIf="deleteselecbtns" class="ion-text-end"  style="right: 0;position: absolute;" >
         <ion-icon class="ion-icons-bottom ion-text-end" name="trash" (click)="deletemyitem(itemsData)"></ion-icon>
       </ion-col>
-      <!-- <ion-col  *ngIf="reviewselecbtns" class="ion-text-end"  style="right: 0;position: absolute;" >
-        <ion-icon class="ion-icons-bottom ion-text-end primary" name="star-half-outline" (click)="openReview(itemsData)"></ion-icon>
-      </ion-col> -->
-
+     
       <ion-grid>
         <ion-row>
           <ion-col col-6>
@@ -78,23 +75,37 @@
 
           </ion-col>
         </ion-row>
+
+          <ion-row  *ngIf="itemsData.starrate >0"> 
+        <ion-col  *ngIf="!bottomrating"  >
+          <p><strong>Review</strong></p>
+          <p>Rating: {{itemsData.starrate}} Star</p>
+          <p>Comments: {{itemsData.stardescription}}</p>
+
+        </ion-col>
+      </ion-row>
       
       </ion-grid>
     </div>
     <div *ngIf="bottomoptions">
       <ion-grid>
         <ion-row>
-          <ion-col class="text-center">
+          <ion-col col-6 class="text-center">
             <ion-icon class="ion-icons-bottom text-center" name="eye-outline" (click)="viewFullPagewithData(itemsData)"></ion-icon>
           </ion-col>
-          <ion-col class="text-center ion-text-center">
+          <ion-col col-6 class="text-center ion-text-center">
             <ion-icon class="ion-icons-bottom text-center ion-text-center"   name="trash-outline" (click)="deleteSelectedItem(itemsData.id)"></ion-icon>
           </ion-col>
-          <ion-col class="ion-text-end">
+          <!-- <ion-col  class="ion-text-end">
             <ion-icon class="ion-icons-bottom ion-text-end" name="star-half-outline" (click)="reviewPage(itemsData)"></ion-icon>
-          </ion-col>
+          </ion-col> -->
         </ion-row>
       </ion-grid>
+    </div>
+    <div >
+      <ion-col *ngIf="bottomrating" class="ion-text-end">
+        <ion-icon class="ion-icons-bottom ion-text-end" name="star-half-outline" (click)="reviewPage(itemsData)"></ion-icon>
+      </ion-col>
     </div>
   </ion-card-content>
 </ion-card>
